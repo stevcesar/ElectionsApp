@@ -18,7 +18,7 @@ const CandidateSchema = new mongoose.Schema({
         required: true,
     },
     election: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Election',
         required: true
     },

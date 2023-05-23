@@ -8,6 +8,7 @@ import morgan from "morgan";
 import path from "path";
 import { fileURLToPath } from "url";
 import dbConnection from "./database/config.js"
+import { createUser } from "./controllers/auth.controller.js";
 
 /* SERVER CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -33,6 +34,16 @@ const storage = multer.diskStorage({
 });
 
 const upload = multer({storage});
+
+/* ROUTES WITH FILES */
+app.post(
+    "/users/register",
+    [
+        upload.single("picture"),
+    ],
+    createUser
+);
+/* ROUTES */
 
 /* DATABASE */
 dbConnection();
