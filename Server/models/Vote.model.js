@@ -2,12 +2,12 @@ import mongoose, { mongo } from "mongoose";
 
 const VoteSchema = new mongoose.Schema({
     voter: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Voter',
         required: true
     },
     candidate: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Candidate',
         required: true
     },

@@ -6,7 +6,7 @@ const TableSchema = new mongoose.Schema({
         required: true
     },
     center:{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Center',
         required: true,
     },

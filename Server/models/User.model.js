@@ -33,13 +33,14 @@ const UserSchema = new mongoose.Schema({
         required: true,
     },
     table: {
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Table',
         required: true
     },
     enable: {
         type: Boolean,
-        required: true
+        required: true,
+        default: false,
     }
 });
 
