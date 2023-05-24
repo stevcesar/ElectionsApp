@@ -9,6 +9,9 @@ import path from "path";
 import { fileURLToPath } from "url";
 import dbConnection from "./database/config.js"
 import { createUser } from "./controllers/auth.controller.js";
+import { check } from "express-validator";
+import validateFields from "./middlewares/validateFields.middleware.js";
+import authRoutes from "./routes/auth.route.js";
 
 /* SERVER CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -37,13 +40,21 @@ const upload = multer({storage});
 
 /* ROUTES WITH FILES */
 app.post(
-    "/users/register",
-    [
+    "/api/auth/register",
+    [//middlewares
+        check('firstName','The first name is required').not().isEmpty(),
+        check('lastName','The last name is required').not().isEmpty(),
+        check('email','The email is required').isEmail(),
+        check('password','password must be longer than 6 characters').isLength({min: 6}),
+        check('rol','The rol is required').not().isEmpty(),
+        check('table','The table is required').isMongoId(),
+        validateFields,
         upload.single("picture"),
     ],
     createUser
 );
 /* ROUTES */
+app.use("/api/auth",authRoutes);
 
 /* DATABASE */
 dbConnection();
