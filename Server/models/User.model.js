@@ -40,7 +40,7 @@ const UserSchema = new mongoose.Schema({
     enable: {
         type: Boolean,
         required: true,
-        default: false,
+        default: true,
     }
 });
 
