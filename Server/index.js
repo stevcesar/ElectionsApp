@@ -12,6 +12,13 @@ import { createUser } from "./controllers/auth.controller.js";
 import { check } from "express-validator";
 import validateFields from "./middlewares/validateFields.middleware.js";
 import authRoutes from "./routes/auth.route.js";
+import { createCandidate } from "./controllers/candidate.controller.js";
+import candidateRoutes from "./routes/candidate.route.js"
+import validateJWT from "./middlewares/validateJWT.middleware.js";
+import centerRouter from "./routes/center.route.js";
+import electionRoutes from "./routes/election.route.js";
+import tableRoutes from "./routes/table.route.js";
+import voteRouter from "./routes/vote.route.js";
 
 /* SERVER CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -40,7 +47,7 @@ const upload = multer({storage});
 
 /* ROUTES WITH FILES */
 app.post(
-    "/api/auth/register",
+    "/api/auth/create",
     [//middlewares
         check('firstName','The first name is required').not().isEmpty(),
         check('lastName','The last name is required').not().isEmpty(),
@@ -53,8 +60,28 @@ app.post(
     ],
     createUser
 );
+app.post(
+    "/api/candidate/create",
+    [//middlewares
+        validateJWT,
+        check('firstName','The first name is required').not().isEmpty(),
+        check('lastName','The last name is required').not().isEmpty(),
+        check('dpi','The dpi is required and equal to 13 characters').isLength({min:13}),
+        check('politicalParty','The political party is required').not().isEmpty(),
+        check('election','The type of election is required').isMongoId(),
+        validateFields,
+        upload.single("picture"),
+
+    ],
+    createCandidate
+);
 /* ROUTES */
 app.use("/api/auth",authRoutes);
+app.use("/api/candidate", candidateRoutes);
+app.use("/api/center",centerRouter);
+app.use("/api/election",electionRoutes);
+app.use("/api/table", tableRoutes);
+app.use("/api/vote",voteRouter);
 
 /* DATABASE */
 dbConnection();
