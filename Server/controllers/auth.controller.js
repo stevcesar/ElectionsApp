@@ -16,7 +16,7 @@ export const createUser = async(req, res)=>{
             });
         }
         //If the user does not exist.
-        user = new User(req.body)
+        user = new User(req.body);
         //Encrypt password.
         const salt = bcrypt.genSaltSync();
         user.password = bcrypt.hashSync(password, salt);

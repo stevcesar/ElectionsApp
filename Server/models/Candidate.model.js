@@ -13,6 +13,12 @@ const CandidateSchema = new mongoose.Schema({
         min: 2,
         max: 50,
     },
+    dpi: {
+        type: String,
+        required: true,
+        min : 13,
+        max: 13
+    },
     politicalParty: {
         type: String,
         required: true,
@@ -21,6 +27,10 @@ const CandidateSchema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Election',
         required: true
+    },
+    picturePath: {
+        type: String,
+        default: "",
     },
     enable: {
         type: Boolean,
