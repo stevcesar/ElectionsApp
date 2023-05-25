@@ -2,20 +2,17 @@ import { Router } from "express";
 import { check } from "express-validator";
 import validateJWT from "../middlewares/validateJWT.middleware.js";
 import validateFields from "../middlewares/validateFields.middleware.js";
-import { createVote, getTotalVotes } from "../controllers/vote.controller.js";
+import { getVoter, registerVoter } from "../controllers/voter.controller.js";
 
 const router = Router();
-
 router.use(validateJWT);
 router.post(
-    "/create",
+    "/update",
     [
         check("voter","The voter is required").isMongoId(),
-        check("candidate","The candidate is required").isMongoId(),
         validateFields
     ],
-    createVote
+    registerVoter
 );
-router.get("/",getTotalVotes)
-
+router.get("/:_id",getVoter);
 export default router;

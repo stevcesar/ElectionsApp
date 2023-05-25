@@ -19,6 +19,7 @@ import centerRouter from "./routes/center.route.js";
 import electionRoutes from "./routes/election.route.js";
 import tableRoutes from "./routes/table.route.js";
 import voteRouter from "./routes/vote.route.js";
+import voterRouter from "./routes/voter.route.js"
 
 /* SERVER CONFIGURATIONS */
 const __filename = fileURLToPath(import.meta.url);
@@ -82,6 +83,7 @@ app.use("/api/center",centerRouter);
 app.use("/api/election",electionRoutes);
 app.use("/api/table", tableRoutes);
 app.use("/api/vote",voteRouter);
+app.use("/api/voter",voterRouter);
 
 /* DATABASE */
 dbConnection();
