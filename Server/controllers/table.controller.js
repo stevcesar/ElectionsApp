@@ -56,3 +56,41 @@ export const getTables= async(req,res)=>{
         });
     }
 }
+
+export const getTable = async(req,res)=>{
+    //Extract variables from params.
+    const {_id} = req.params;    
+    try {
+        const table = await Table.findById(_id).populate('center','name');
+        res.status(200).json({
+            ok: true,
+            table
+        })
+    } catch (err) {
+        // If there is an error, it is caught and a message is sent.
+        console.log(err)
+        res.status(500).json({
+            ok: false,
+            msg: 'Contact the administrator'
+        });
+    }
+}
+
+export const updateTableVoting=async(req,res)=>{
+    //Extract variables from params.
+    const {_id,voting} = req.params;
+    try {
+        const table = await Table.findByIdAndUpdate(_id,{voting},{ new: true}).populate('center','name');
+        res.status(200).json({
+            ok: true,
+            table
+        })
+    } catch (err) {
+        // If there is an error, it is caught and a message is sent.
+        console.log(err)
+        res.status(500).json({
+            ok: false,
+            msg: 'Contact the administrator'
+        });
+    }
+}
