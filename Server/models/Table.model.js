@@ -17,6 +17,10 @@ const TableSchema = new mongoose.Schema({
     enable: {
         type: Boolean,
         default: false,
+    },
+    voting: {
+        type: Boolean,
+        default: false,
     }
 })
 

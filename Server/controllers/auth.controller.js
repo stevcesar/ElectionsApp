@@ -48,6 +48,7 @@ export const loginUser = async(req,res)=>{
     try {
         //Check if the email exists.
         const user = await User.findOne({email});
+
         //If the user does not exist.
         if (!user){
             return res.status(400).json({
@@ -99,9 +100,16 @@ export const revalidateToken = async(req,res)=>{
     const {_id, firstName, lastName} = req;
     //Generate the token
     const token = await generateJWT(_id,firstName,lastName);
+    const user = await User.findOne({_id});
     res.json({
         ok: true,
-        _id, firstName, lastName,
+        _id: user._id,
+        firstName: user.firstName,
+        lastName: user.lastName,
+        email: user.email,
+        picturePath: user.picturePath,
+        rol: user.rol,
+        table: user.table,
         token
     });
 
