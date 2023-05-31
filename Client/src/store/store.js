@@ -9,13 +9,14 @@ import {
     PURGE,
     REGISTER,
   } from "redux-persist";
-import { authSlice, tableSlice } from './';
+import { authSlice, tableSlice, voterSlicer } from './';
 
 const rootReducer = combineReducers({
     auth: authSlice.reducer,
     table: tableSlice.reducer,
+    voter: voterSlicer.reducer,
 });
-const persistConfig = { key: "root", storage, whitelist: ['auth','table']};
+const persistConfig = { key: "root", storage, whitelist: ['auth','table','voter']};
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
     reducer: persistedReducer,

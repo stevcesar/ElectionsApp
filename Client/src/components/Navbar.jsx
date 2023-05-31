@@ -7,7 +7,7 @@ import {
     ArrowDropDownOutlined,
 } from "@mui/icons-material";
 import  FlexBetween  from "./FlexBetween";
-import { useAuthStore } from "../hooks";
+import { useAuthStore,useTableStore,useVoterStore } from "../hooks";
 import {
     AppBar,
     Button,
@@ -25,6 +25,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 
 export const Navbar = ({isSidebarOpen, setIsSidebarOpen})=>{
     const {startMode,user,mode,starLogout} =useAuthStore();
+    const {startUnsetVoter} = useVoterStore();
     const theme = useTheme();
     const [anchorEl,setAnchorEl] = useState(null);
     const IsOpen= Boolean(anchorEl);
@@ -33,6 +34,7 @@ export const Navbar = ({isSidebarOpen, setIsSidebarOpen})=>{
     const handleClick = (event) => setAnchorEl(event.currentTarget);
     const hadleSubmit = ()=>{
         starLogout(),
+        startUnsetVoter();
         navigate("/login")
 
     }
@@ -120,7 +122,7 @@ export const Navbar = ({isSidebarOpen, setIsSidebarOpen})=>{
                                 onClose={handleClose}
                                 anchorOrigin={{vertical: "bottom", horizontal: "center"}}
                             >
-                                <MenuItem onClick={()=>starLogout()}>Log Out</MenuItem>
+                                <MenuItem onClick={()=>hadleSubmit()}>Log Out</MenuItem>
                             </Menu>
                     </FlexBetween>
                 </FlexBetween>

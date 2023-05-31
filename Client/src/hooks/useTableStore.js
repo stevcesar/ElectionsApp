@@ -11,7 +11,6 @@ export const useTableStore =()=>{
         
         try {
             const {data} = await eletionApi.get(`/api/table/${user.table}`);
-            delete data.ok;
             dispatch(setTable(data.table));
         } catch (err) {
             dispatch(unsetTable('Error en tabla'));
@@ -20,7 +19,6 @@ export const useTableStore =()=>{
     const startUpdateTableVoting = async(voting) =>{
         try {
             const {data} = await eletionApi.patch(`/api/table/update/voting/${user.table}/${voting}`)
-            delete data.ok;
             dispatch(setTable(data.table));
         } catch (err) {
             dispatch(unsetTable('Error en tabla'));

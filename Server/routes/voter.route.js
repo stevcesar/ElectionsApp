@@ -14,5 +14,11 @@ router.post(
     ],
     registerVoter
 );
-router.get("/:_id",getVoter);
+router.get(
+    "/:dpi",
+    [
+        check('dpi','The dpi is required and equal to 13 characters').isLength({min:13}),
+        validateFields
+    ]
+,getVoter);
 export default router;
