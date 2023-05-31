@@ -1,10 +1,13 @@
-import { Box,Button,Typography } from "@mui/material"
+import { Box,Button,Grid,Typography,useTheme } from "@mui/material"
 import {LockOutlined} from "@mui/icons-material";
-import { useTableStore } from "../hooks";
+import { useTableStore,useVoterStore } from "../hooks";
+
 export const LockedScreen = ()=>{
-    const {startGetTable}= useTableStore();
+    const {startGetTable,table}= useTableStore();
+    const {startVoter,voter}= useVoterStore();
     const handleSubmit = ()=>{        
         startGetTable();
+        startVoter({dpi:voter.dpi})
     }
     return(
         <Box
@@ -15,21 +18,21 @@ export const LockedScreen = ()=>{
                 left: 0,
                 width: "100vw",
                 height: "100vh",
-                backgroundColor: "rgba(128, 128, 128, 0.5)",
+                backgroundColor: "rgba(50, 50, 50, 0.9)",
                 zIndex: 9999,
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
             }}
             >
-                <LockOutlined fontSize="large"/>
-                <Typography variant="h2" color="text.primary">
+                <LockOutlined fontSize="large" sx={{color: "white"}}/>
+                <Typography variant="h2" color="white">
                     Votación en curso
                 </Typography>
-                <Typography variant="h3" color="text.primary">
+                <Typography variant="h3" color="white">
                     Terminal bloqueada
                 </Typography>
-                <Button onClick={handleSubmit}>
+                <Button sx={{mt:"10px"}} variant="contained" onClick={handleSubmit}>
                     Finalizar
                 </Button>
         </Box>

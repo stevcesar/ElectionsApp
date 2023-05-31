@@ -2,10 +2,9 @@ import { Navigate, Route, Router, Routes, useNavigate, useLocation } from "react
 import { useEffect, useState } from "react"
 import { LoginPage } from "../scenes/loginPage"
 import {Dashboard} from "../scenes/dashboardPage"
-import { VoterPage } from "../scenes/voterPage"
+import { VoterPage } from "../scenes/VoterPage"
 import { Layout } from "../scenes/layout"
 import { useAuthStore } from "../hooks"
-import {PrivateRoutes} from "../utils/PrivateRoutes.jsx"
 import { UrnaPage } from "../scenes/UrnaPage"
 import { VotePage } from "../scenes/VotePage"
 

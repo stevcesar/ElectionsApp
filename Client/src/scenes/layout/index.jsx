@@ -2,11 +2,10 @@ import {Box, useMediaQuery} from "@mui/material";
 import { useEffect, useState } from "react";
 import { Navbar,Sidebar,LockedScreen } from "../../components";
 import { Outlet, useLocation } from "react-router-dom";
-import { useAuthStore,useTableStore } from "../../hooks"; 
+import { useAuthStore,useTableStore, useVoterStore} from "../../hooks"; 
 export const Layout = ()=>{
     const isNonMobile = useMediaQuery("(min-width: 600px)");
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
-    const {user} = useAuthStore();
     const {pathname} = useLocation();
     const {startGetTable,table} = useTableStore();
     useEffect(()=>{

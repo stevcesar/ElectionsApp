@@ -32,6 +32,10 @@ const VoterSchema = new mongoose.Schema({
         ref: 'Table',
         required: true
     },
+    picturePath: {
+        type: String,
+        default: "",
+    },
 });
 
 VoterSchema.method('toJSON', function(){
