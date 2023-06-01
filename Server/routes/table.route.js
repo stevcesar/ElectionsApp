@@ -17,10 +17,11 @@ router.post(
     createTable
 );
 router.patch(
-    "/update/voting/:_id/:voting",
+    "/update/voting/:_id/:voting/:voter",
     [
         check("_id","The table is required").isMongoId(),
         check("voting","The voting is required").isBoolean(),
+        check("voter","The voter is required").isString(),
         validateFields
     ],
     updateTableVoting

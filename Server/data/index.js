@@ -170,3 +170,96 @@ export const votes = [
         date: "2023-05-25T04:05:12.876+00:00"
     },
 ]
+
+export const candidates = [
+    {
+        firstName: "Marita",
+        lastName: "Ray",
+        dpi: "4151373614745",
+        politicalParty: "Partido Sol",
+        election: "646ebed0d3a83fd8437a6d30",
+        picturePath: "Presidente3.jpg"
+    },
+    {
+        firstName: "Yair",
+        lastName: "Edwards",
+        dpi: "8917234790415",
+        politicalParty: "Partido Luz",
+        election: "646ebed0d3a83fd8437a6d30",
+        picturePath: "Presidente4.jpg"
+    },
+    {
+        firstName: "Jordán",
+        lastName: "Phillips",
+        dpi: "2137317758306",
+        politicalParty: "Partido Mesa",
+        election: "646ebed0d3a83fd8437a6d30",
+        picturePath: "Presidente5.jpg"
+    },
+    {
+        firstName: "Berto",
+        lastName: "Holland",
+        dpi: "2840068526137",
+        politicalParty: "Partido Moneda",
+        election: "646ebed0d3a83fd8437a6d30",
+        picturePath: "Presidente6.jpg"
+    },
+    {
+        firstName: "Santos",
+        lastName: "Burke",
+        dpi: "2840068526137",
+        politicalParty: "Partido Morado",
+        election: "646ebed0d3a83fd8437a6d30",
+        picturePath: "Presidente6.jpg"
+    },
+    {
+        firstName: "Lidia",
+        lastName: "Soto",
+        dpi: "4087761057385",
+        politicalParty: "Partido Moneda",
+        election: "646fbdf510e940e8677f3686",
+        picturePath: "Alcalde3.jpg"
+    },
+    {
+        firstName: "Jordon",
+        lastName: "Manning",
+        dpi: "3384804906414",
+        politicalParty: "Partido Morado",
+        election: "646fbdf510e940e8677f3686",
+        picturePath: "Alcalde4.jpg"
+    },
+    {
+        firstName: "Luna",
+        lastName: "Odom",
+        dpi: "1679703781903",
+        politicalParty: "Partido Numero",
+        election: "646fbdf510e940e8677f3686",
+        picturePath: "Alcalde5.jpg"
+    },
+    {
+        firstName: "Luke",
+        lastName: "Lane",
+        dpi: "8467697616869",
+        politicalParty: "Partido Tres",
+        election: "646fbdf510e940e8677f3686",
+        picturePath: "Alcalde6.jpg"
+    },
+    {
+        firstName: "Elise",
+        lastName: "Novak",
+        dpi: "3289909360631",
+        politicalParty: "Partido Blanco",
+        election: "646fbdf510e940e8677f3686",
+        picturePath: "Alcalde7.jpg"
+    },
+    {
+        firstName: "Mylie",
+        lastName: "Pineda",
+        dpi: "8430954024080",
+        politicalParty: "Partido Pausa",
+        election: "646fbdf510e940e8677f3686",
+        picturePath: "Alcalde8.jpg"
+    },
+
+
+]; 

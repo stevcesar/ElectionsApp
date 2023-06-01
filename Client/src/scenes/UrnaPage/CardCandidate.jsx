@@ -1,10 +1,14 @@
 import { Box,Card,CardActionArea, CardContent, CardMedia, Grid, Typography ,useTheme} from "@mui/material"
 import { getEnvVariables } from "../../helpers/getEnvVariables";
+import { useVoteStore } from "../../hooks/useVoteStore";
+import { useEffect } from "react";
 
-export const CardCandidate = ({_id,picturePath, firstName, lastName, politicalParty, isSelected, onClick})=>{
+export const CardCandidate = ({_id,picturePath, firstName, lastName, politicalParty, isSelected, onClick,election})=>{
     const {VITE_API_URL} = getEnvVariables();
+    const {startSetVote,vote} = useVoteStore();
     const theme = useTheme();
     const handleClick =() =>{
+        startSetVote({candidate: _id, election})
         if(isSelected){
             return onClick(null);
         }
@@ -30,24 +34,34 @@ export const CardCandidate = ({_id,picturePath, firstName, lastName, politicalPa
                     </Grid>
                     <Grid item xs={6}>
                         <CardContent >
-                            <Typography variant="h5" >
-                                Nombre
-                            </Typography>
-                            <Typography mb="3px" variant="h5" fontSize={12} >
-                                {firstName}
-                            </Typography>
-                            <Typography variant="h5" >
-                                Apellido
-                            </Typography>
-                            <Typography mb="3px" variant="h5" fontSize={12}>
-                                {lastName}
-                            </Typography>
-                            <Typography variant="h5" >
-                                Partido Político
-                            </Typography>
-                            <Typography mb="3px" variant="h5" fontSize={12}>
-                                {politicalParty}
-                            </Typography>
+                            {(firstName === 'Nulo' || firstName ==="En Blanco") ? (
+                                <Typography variant="h5" textAlign="center">
+                                    {`Voto ${firstName}`}
+                                </Typography>
+                            ):(
+                                <>
+                                    <Typography variant="h5" >
+                                        Nombre
+                                    </Typography>
+                                    <Typography mb="3px" variant="h5" fontSize={12} >
+                                        {firstName}
+                                    </Typography>
+                                    <Typography variant="h5" >
+                                        Apellido
+                                    </Typography>
+                                    <Typography mb="3px" variant="h5" fontSize={12}>
+                                        {lastName}
+                                    </Typography>
+                                    <Typography variant="h5" >
+                                        Partido 
+                                    </Typography>
+                                    <Typography mb="3px" variant="h5" fontSize={12}>
+                                        {politicalParty}
+                                    </Typography>
+                                    </>
+                            )
+                            }
+                            
                         </CardContent>
                     </Grid>                        
                 </Grid>

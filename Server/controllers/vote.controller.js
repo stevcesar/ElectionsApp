@@ -2,14 +2,15 @@ import Vote from "../models/Vote.model.js";
 import Voter from "../models/Voter.model.js";
 import Candidate from "../models/Candidate.model.js";
 import Election from "../models/Election.model.js";
+import mongoose from "mongoose";
 
 export const createVote = async(req,res)=>{
     //Extract variables from body.
-    const {voter,candidate}=req.body;
+    const {voter,candidates}=req.body;
     try {
         //Check if the voter and candidate exists.
         const infvoter = await Voter.findOne({_id: voter})
-        const infcandidate = await Candidate.findOne({_id: candidate});
+        const infcandidate = await Candidate.findOne({_id: {$in: candidates.map(id => mongoose.Types.ObjectId.createFromHexString(id.candidate))}});
         if(!infvoter || !infcandidate){
             return res.status(400).json({
                 ok: false,
@@ -23,8 +24,11 @@ export const createVote = async(req,res)=>{
         })
         }
         //If the voter and candidate exists.
-        const vote = new Vote({...req.body, date: new Date()});
-        await vote.save();
+        
+        candidates.forEach(async(candidate)=>{
+          const vote = new Vote({voter,candidate: candidate.candidate,date: new Date()});
+          await vote.save();
+        })
         return res.status(201).json({
             ok: true,
             msg: "The vote is saved"

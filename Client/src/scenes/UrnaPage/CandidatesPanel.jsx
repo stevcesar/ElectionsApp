@@ -1,9 +1,14 @@
 import { Grid } from "@mui/material"
 import { CardCandidate } from "./CardCandidate"
-import { useState } from "react"
+import { useEffect, useState } from "react"
+import { useTableStore } from "../../hooks";
 
 export const CandidatesPanel =({value,index,children})=>{
     const [selectedCardId, setSelectedCardId] = useState();
+    const {table} = useTableStore();
+    useEffect(()=>{
+        setSelectedCardId(null);
+    },[table])
     const handleCardClick=(id)=>{
         setSelectedCardId(id);
     }
@@ -22,7 +27,8 @@ export const CandidatesPanel =({value,index,children})=>{
                         picturePath,
                         firstName,
                         lastName,
-                        politicalParty
+                        politicalParty,
+                        election
                     })=>(
                         <Grid key={_id}item xs={12} sm={6} md={4} >
                             <CardCandidate
@@ -34,6 +40,7 @@ export const CandidatesPanel =({value,index,children})=>{
                                 politicalParty={politicalParty}                                                        
                                 onClick={handleCardClick}
                                 isSelected={selectedCardId === _id}
+                                election= {election.name}
                             />
                         </Grid>
                     )

@@ -6,7 +6,7 @@ import FlexBetween from "../../components/FlexBetween"
 import { useAuthStore, useTableStore, useVoterStore } from "../../hooks"
 import { Header } from "../../components";
 import { getEnvVariables } from "../../helpers/getEnvVariables";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 
 const voteSchema = yup.object().shape({
@@ -19,15 +19,18 @@ const initialValueVote={
 
 export const VotePage =()=>{
     const {user} = useAuthStore();
-    const {voter,startVoter,voted,errorMessageVoter,startClearMessageVoter} = useVoterStore();
+    const {voter,startVoter,voted,errorMessageVoter,startClearMessageVoter,startUnsetVoter} = useVoterStore();
     const {startUpdateTableVoting} = useTableStore();
     const initialValuesError= {notregister: "", notable: ""};
-    const [errorvoter, isErrorVoter] = useState(initialValueVote);
+    const [errorvoter, isErrorVoter] = useState(initialValuesError);
     const handleFormSubmit = (values)=>{        
         startVoter(values);
         startClearMessageVoter();
         isErrorVoter(initialValueVote)
     }
+    useEffect(()=>{
+        startUnsetVoter();
+    },[])
     const handleSubmit = ()=>{
         if(!voter.registered){
             isErrorVoter((prevErrors)=>({
@@ -41,7 +44,7 @@ export const VotePage =()=>{
                 notable: "El ciudadano no esta asignado a esta mesa"
             }))
         }
-        startUpdateTableVoting(true);
+        startUpdateTableVoting(true,voter.dpi);
         
         
     }

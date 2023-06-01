@@ -21,6 +21,10 @@ const TableSchema = new mongoose.Schema({
     voting: {
         type: Boolean,
         default: false,
+    },
+    voter: {
+        type: String,
+        ref: 'Voter',
     }
 })
 

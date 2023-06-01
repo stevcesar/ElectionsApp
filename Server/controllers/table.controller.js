@@ -1,5 +1,6 @@
 import Table from "../models/Table.model.js";
 import Center from "../models/Center.model.js";
+import mongoose from "mongoose";
 export const createTable = async(req,res)=>{
     //Extract variables from body.
     const {number, center} = req.body;
@@ -78,13 +79,13 @@ export const getTable = async(req,res)=>{
 
 export const updateTableVoting=async(req,res)=>{
     //Extract variables from params.
-    const {_id,voting} = req.params;
-    try {
-        const table = await Table.findByIdAndUpdate(_id,{voting},{ new: true}).populate('center','name');
-        res.status(200).json({
-            ok: true,
-            table
-        })
+    const {_id,voting,voter} = req.params;
+    try {       
+            const table = await Table.findByIdAndUpdate(_id,{voting,voter},{ new: true}).populate('center','name');
+            res.status(200).json({
+                ok: true,
+                table
+            })                
     } catch (err) {
         // If there is an error, it is caught and a message is sent.
         console.log(err)
