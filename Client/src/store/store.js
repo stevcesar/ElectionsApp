@@ -9,7 +9,7 @@ import {
     PURGE,
     REGISTER,
   } from "redux-persist";
-import { authSlice, candidateSlice, tableSlice, voterSlicer,voteSlice } from './';
+import { authSlice, candidateSlice, kpiSlice, tableSlice, voterSlicer,voteSlice } from './';
 
 const rootReducer = combineReducers({
     auth: authSlice.reducer,
@@ -17,8 +17,9 @@ const rootReducer = combineReducers({
     voter: voterSlicer.reducer,
     candidate: candidateSlice.reducer,
     vote: voteSlice.reducer,
+    kpi: kpiSlice.reducer,
 });
-const persistConfig = { key: "root", storage, whitelist: ['auth','table','voter','candidate','vote']};
+const persistConfig = { key: "root", storage, whitelist: ['auth','table','voter','candidate','vote','kpi']};
 const persistedReducer = persistReducer(persistConfig, rootReducer);
 export const store = configureStore({
     reducer: persistedReducer,

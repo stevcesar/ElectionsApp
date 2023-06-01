@@ -25,6 +25,24 @@ export const useTableStore =()=>{
         }
     }
 
+    const startUpdateTableEnable = async(enable) =>{
+        try {
+            const {data} = await eletionApi.patch(`/api/table/update/enable/${user.table}/${enable}`)
+            dispatch(setTable(data.table));
+        } catch (err) {
+            dispatch(unsetTable('Error en tabla'));
+        }
+    }
+
+    const startUpdateTableClose = async(close) =>{
+        try {
+            const {data} = await eletionApi.patch(`/api/table/update/close/${user.table}/${close}`)
+            dispatch(setTable(data.table));
+        } catch (err) {
+            dispatch(unsetTable('Error en tabla'));
+        }
+    }
+
     const startUnSetTable = ()=>{
         dispatch(unsetTable());
         dispatch(clearErrorMessageTable());
@@ -39,5 +57,7 @@ export const useTableStore =()=>{
         startGetTable,
         startUpdateTableVoting,
         startUnSetTable,
+        startUpdateTableEnable,
+        startUpdateTableClose,
     }
 }

@@ -16,6 +16,6 @@ router.post(
     ],
     createVote
 );
-router.get("/",getTotalVotes)
+router.get("/:rol",getTotalVotes)
 
 export default router;
