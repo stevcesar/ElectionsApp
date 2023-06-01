@@ -7,7 +7,7 @@ import {
     ArrowDropDownOutlined,
 } from "@mui/icons-material";
 import  FlexBetween  from "./FlexBetween";
-import { useAuthStore,useTableStore,useVoterStore } from "../hooks";
+import { useAuthStore,useCandidateStore,useTableStore,useVoterStore,useVoteStore } from "../hooks";
 import {
     AppBar,
     Button,
@@ -21,11 +21,14 @@ import {
     useTheme
 } from "@mui/material";
 import { getEnvVariables } from "../helpers/getEnvVariables";
-import { Navigate, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const Navbar = ({isSidebarOpen, setIsSidebarOpen})=>{
     const {startMode,user,mode,starLogout} =useAuthStore();
     const {startUnsetVoter} = useVoterStore();
+    const {startOnLogoutCandidates} = useCandidateStore();
+    const {startUnSetTable}= useTableStore();
+    const {statUnsetVote}= useVoteStore();
     const theme = useTheme();
     const [anchorEl,setAnchorEl] = useState(null);
     const IsOpen= Boolean(anchorEl);
@@ -35,6 +38,9 @@ export const Navbar = ({isSidebarOpen, setIsSidebarOpen})=>{
     const hadleSubmit = ()=>{
         starLogout(),
         startUnsetVoter();
+        startOnLogoutCandidates();
+        startUnSetTable();
+        statUnsetVote();
         navigate("/login")
 
     }

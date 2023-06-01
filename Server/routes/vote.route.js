@@ -11,7 +11,7 @@ router.post(
     "/create",
     [
         check("voter","The voter is required").isMongoId(),
-        check("candidate","The candidate is required").isMongoId(),
+        check("candidates","The candidate is required").isArray(),
         validateFields
     ],
     createVote

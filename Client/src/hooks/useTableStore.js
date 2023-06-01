@@ -3,7 +3,7 @@ import eletionApi from "../api/electionApi";
 import { setTable, unsetTable, clearErrorMessageTable } from "../store";
 
 export const useTableStore =()=>{
-    const {table,errrMessageTable} = useSelector(state => state.table);
+    const {table,errorMessageTable} = useSelector(state => state.table);
     const { user } = useSelector( state => state.auth );
     const dispatch = useDispatch();
 
@@ -16,22 +16,28 @@ export const useTableStore =()=>{
             dispatch(unsetTable('Error en tabla'));
         }
     }
-    const startUpdateTableVoting = async(voting) =>{
+    const startUpdateTableVoting = async(voting,voter="null") =>{
         try {
-            const {data} = await eletionApi.patch(`/api/table/update/voting/${user.table}/${voting}`)
+            const {data} = await eletionApi.patch(`/api/table/update/voting/${user.table}/${voting}/${voter}`)
             dispatch(setTable(data.table));
         } catch (err) {
             dispatch(unsetTable('Error en tabla'));
         }
     }
 
+    const startUnSetTable = ()=>{
+        dispatch(unsetTable());
+        dispatch(clearErrorMessageTable());
+    }
+
     return{
         //* Properties
         table,
-        errrMessageTable,
+        errorMessageTable,
 
         //*Methods
         startGetTable,
         startUpdateTableVoting,
+        startUnSetTable,
     }
 }
