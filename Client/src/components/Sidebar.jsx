@@ -30,7 +30,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import FlexBetween from "./FlexBetween";
 import { useEffect, useState } from "react";
 import { getEnvVariables } from "../helpers/getEnvVariables";
-import { useAuthStore } from "../hooks";
+import { useAuthStore,useTableStore } from "../hooks";
 
 const navItems =[
     {
@@ -160,13 +160,12 @@ export const Sidebar =({
     const [active, setActive] = useState("");
     const navigate = useNavigate();
     const theme = useTheme();
-    const roluser = "Presidente";
-    
-    
-
+    const {user}=useAuthStore();
+    const {table}=useTableStore();
     useEffect(()=>{
         setActive(pathname.substring(1));
     },[pathname]);
+   
 
     return(
         <Box component="nav">
@@ -204,7 +203,7 @@ export const Sidebar =({
                         </Box>
                         <List>
                             {navItems.map(({text,icon,rol,pathname})=>{
-                                if(!icon && rol.includes(roluser)){
+                                if(!icon && rol.includes(user.rol)){
                                     return (
                                         <Typography key={text} sx={{m: "2rem 0 0.5rem 2.5rem"}}>
                                             {text}        
@@ -212,10 +211,11 @@ export const Sidebar =({
                                     );
                                 }
                                 const lcText = pathname.toLowerCase();
-                                if (icon && rol.includes(roluser)){
+                                if (icon && rol.includes(user.rol)){
                                     return(
                                         <ListItem key={text} disablePadding>
                                             <ListItemButton
+                                                disabled={(user.rol === 'Presidente' && text !=='Iniciar Mesa') ? !table.enable : false}
                                                 onClick={()=>{
                                                     navigate(`/${lcText}`);
                                                     setActive(lcText)

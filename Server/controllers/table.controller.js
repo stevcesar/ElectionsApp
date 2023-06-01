@@ -95,3 +95,41 @@ export const updateTableVoting=async(req,res)=>{
         });
     }
 }
+
+export const updateTableEnable=async(req,res)=>{
+    //Extract variables from params.
+    const {_id,enable} = req.params;
+    try {       
+            const table = await Table.findByIdAndUpdate(_id,{enable},{ new: true}).populate('center','name');
+            res.status(200).json({
+                ok: true,
+                table
+            })                
+    } catch (err) {
+        // If there is an error, it is caught and a message is sent.
+        console.log(err)
+        res.status(500).json({
+            ok: false,
+            msg: 'Contact the administrator'
+        });
+    }
+}
+
+export const updateTableClose=async(req,res)=>{
+    //Extract variables from params.
+    const {_id,close} = req.params;
+    try {       
+            const table = await Table.findByIdAndUpdate(_id,{close},{ new: true}).populate('center','name');
+            res.status(200).json({
+                ok: true,
+                table
+            })                
+    } catch (err) {
+        // If there is an error, it is caught and a message is sent.
+        console.log(err)
+        res.status(500).json({
+            ok: false,
+            msg: 'Contact the administrator'
+        });
+    }
+}

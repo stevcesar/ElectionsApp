@@ -2,7 +2,7 @@ import { Router } from "express";
 import { check } from "express-validator";
 import validateJWT from "../middlewares/validateJWT.middleware.js";
 import validateFields from "../middlewares/validateFields.middleware.js";
-import { createTable, getTable, getTables, updateTableVoting } from "../controllers/table.controller.js";
+import { createTable, getTable, getTables, updateTableClose, updateTableEnable, updateTableVoting } from "../controllers/table.controller.js";
 
 const router = Router();
 
@@ -25,6 +25,24 @@ router.patch(
         validateFields
     ],
     updateTableVoting
+);
+router.patch(
+    "/update/close/:_id/:close",
+    [
+        check("_id","The table is required").isMongoId(),
+        check("close","The voting is required").isBoolean(),
+        validateFields
+    ],
+    updateTableClose
+);
+router.patch(
+    "/update/enable/:_id/:enable/",
+    [
+        check("_id","The table is required").isMongoId(),
+        check("enable","The voting is required").isBoolean(),
+        validateFields
+    ],
+    updateTableEnable
 );
 router.get(
     "/:_id",

@@ -4,13 +4,16 @@ import { LoginPage } from "../scenes/loginPage"
 import {Dashboard} from "../scenes/dashboardPage"
 import { VoterPage } from "../scenes/VoterPage"
 import { Layout } from "../scenes/layout"
-import { useAuthStore } from "../hooks"
+import { useAuthStore,useTableStore } from "../hooks"
 import { UrnaPage } from "../scenes/UrnaPage"
 import { VotePage } from "../scenes/VotePage"
+import { StartTablePage } from "../scenes/startTablePage"
+import { CloseTablePage } from "../scenes/closeTablePage"
 
 
 export const AppRouter = () =>{
-    const {status,checkAuthToken} = useAuthStore();
+    const {status,checkAuthToken,user} = useAuthStore();
+    const {table} = useTableStore();
 
     useEffect(()=>{
         checkAuthToken();
@@ -36,8 +39,18 @@ export const AppRouter = () =>{
                             <Route element={ <Layout /> }>
                             <Route path="/" element={ <Navigate to ="/dashboard" replace/> } />
                             <Route path="/dashboard" element={<Dashboard />} />
-                            <Route path="/urna" element={<UrnaPage />} />
-                            <Route path="/buscarelector" element={<VotePage />} />
+                            {/* PRESIDENTE RUTES */}
+                            {!table.close && (
+                                (user.rol === 'Presidente' && table.enable === false)? (
+                                    <Route path="/iniciarmesa" element={<StartTablePage/>}/>
+                                ):(
+                                    <>
+                                    <Route path="/cerrarmesa" element={<CloseTablePage/>}/>
+                                    <Route path="/urna" element={<UrnaPage />} />
+                                    <Route path="/buscarelector" element={<VotePage />} />
+                                    </>
+                                )
+                            )}                            
                             <Route path="/*" element={ <Navigate to="/" /> } />
                             </Route>
                         </>

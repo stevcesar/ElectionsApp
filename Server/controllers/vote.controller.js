@@ -45,11 +45,11 @@ export const createVote = async(req,res)=>{
 }
 
 export const getTotalVotes = async(req,res)=>{
-    //Extract variables from body.
-    const {rol} = req.body;
+    //Extract variables from params.
+    const {rol} = req.params;
     try {
         //Check if the user has access.
-        if(rol !== "Admin"){
+        if(rol !== "Admin" && rol !== "Presidente"){
             return res.status(401).json({
                 ok: false,
                 msg: "You don't have access"

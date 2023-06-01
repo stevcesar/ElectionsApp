@@ -36,6 +36,7 @@ export const colorTokens = {
             ...(mode === 'dark') ? {
                 // palette values for dark mode
                 primay: {
+                    ...colorTokens.primary,
                     dark: colorTokens.primary[200],
                     main: colorTokens.primary[500],
                     light: colorTokens.primary[800]
@@ -54,6 +55,7 @@ export const colorTokens = {
             } : {
                 // palette values for light mode
                 primay: {
+                    ...colorTokens.primary,
                     dark: colorTokens.primary[700],
                     main: colorTokens.primary[500],
                     light: colorTokens.primary[50]
