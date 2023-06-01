@@ -6,7 +6,7 @@ const TableSchema = new mongoose.Schema({
         required: true
     },
     center:{
-        type: Schema.Types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: 'Center',
         required: true,
     },
@@ -17,6 +17,14 @@ const TableSchema = new mongoose.Schema({
     enable: {
         type: Boolean,
         default: false,
+    },
+    voting: {
+        type: Boolean,
+        default: false,
+    },
+    voter: {
+        type: String,
+        ref: 'Voter',
     }
 })
 

@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import mongoose, { mongo } from "mongoose";
 
-const UserSchema = new mongoose.Schema({
+const CandidateSchema = new mongoose.Schema({
     firstName: {
         type: String,
         required: true,
@@ -13,41 +13,35 @@ const UserSchema = new mongoose.Schema({
         min: 2,
         max: 50,
     },
-    email: {
+    dpi: {
         type: String,
         required: true,
-        max: 50,
-        unique: true
+        min : 13,
+        max: 13
     },
-    password: {
+    politicalParty: {
         type: String,
         required: true,
-        min: 5,
+    },
+    election: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Election',
+        required: true
     },
     picturePath: {
         type: String,
         default: "",
     },
-    rol: {
-        type: String,
-        required: true,
-    },
-    table: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Table',
-        required: true
-    },
     enable: {
         type: Boolean,
-        required: true,
         default: true,
     }
 });
 
-UserSchema.method('toJSON', function(){
+CandidateSchema.method('toJSON', function(){
     const {__v, ...object} = this.toObject();
     return object;
 });
 
-const User = mongoose.model("User", UserSchema);
-export default User;
+const Candidate = mongoose.model("Candidate", CandidateSchema);
+export default Candidate;
