@@ -1,8 +1,6 @@
 import { useDispatch, useSelector } from "react-redux";
 import eletionApi from "../api/electionApi";
 import { onLoadKpi,onLogoutKpi } from "../store"; 
-import { typographyClasses } from "@mui/material";
-
 export const useKpiStore =()=>{
     const {kpis,errorMessageKpi} = useSelector(state=>state.kpi);
     const { user } = useSelector( state => state.auth );
@@ -17,6 +15,12 @@ export const useKpiStore =()=>{
         }
     }
 
+
+    const startOnLogoutKpi =()=>{
+        dispatch(onLogoutKpi());
+    }
+
+
     return{
         //* Properties
         kpis,
@@ -24,5 +28,7 @@ export const useKpiStore =()=>{
 
         //*Methods
         startGetVotes,
+        startOnLogoutKpi,
+
     }
 }

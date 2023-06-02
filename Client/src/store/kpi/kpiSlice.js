@@ -3,7 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 export const kpiSlice = createSlice({
     name: 'kpi',
     initialState:{
-        kpis:{},
+
+        kpis:[],
         errorMessageKpi: undefined
     },
     reducers:{
@@ -12,7 +13,7 @@ export const kpiSlice = createSlice({
             state.errorMessageKpi = undefined
         },
         onLogoutKpi:(state,{payload})=>{
-            state.kpis ={},
+            state.kpis =[],
             state.errorMessageKpi= payload
         }
     }

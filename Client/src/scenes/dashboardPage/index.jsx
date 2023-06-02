@@ -2,12 +2,10 @@ import { useTheme,Button, Typography, TextField, Box,useMediaQuery, Grid} from "
 import {PeopleAltOutlined} from '@mui/icons-material'
 import FlexBetween from "../../components/FlexBetween";
 import { BreakdownChart, Header, StatBox } from "../../components";
-import { useEffect } from "react";
-import { useKpiStore } from "../../hooks/useKpiStore";
+import { useKpiStore } from "../../hooks";
 
 export const Dashboard =()=>{
     const theme = useTheme();
-    const isNonMediumScreens = useMediaQuery("(min-width: 1200px)");
     const {startGetVotes} = useKpiStore();
     const handleClick=()=>{
         startGetVotes();

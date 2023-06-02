@@ -3,3 +3,5 @@ export * from './useTableStore';
 export * from './useVoterStore';
 export * from './useCandidateStore';
 export * from './useVoteStore';
+export * from './useKpiStore';
+

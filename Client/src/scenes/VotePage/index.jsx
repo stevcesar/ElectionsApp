@@ -33,7 +33,7 @@ export const VotePage =()=>{
     },[])
     const handleSubmit = ()=>{
         if(!voter.registered){
-            isErrorVoter((prevErrors)=>({
+            return isErrorVoter((prevErrors)=>({
                 ...prevErrors,
                 notregister: "El ciudadano no esta empadronado"
             }))
