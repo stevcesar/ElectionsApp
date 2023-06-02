@@ -17,7 +17,7 @@ export const useKpiStore =()=>{
         }
     }
 
-    const startOnLogoutKpi = ()=>{
+    const startOnLogoutKpi =()=>{
         dispatch(onLogoutKpi());
     }
 
@@ -28,6 +28,6 @@ export const useKpiStore =()=>{
 
         //*Methods
         startGetVotes,
-        startOnLogoutKpi
+        startOnLogoutKpi,
     }
 }

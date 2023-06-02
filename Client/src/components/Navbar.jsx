@@ -7,7 +7,7 @@ import {
     ArrowDropDownOutlined,
 } from "@mui/icons-material";
 import  FlexBetween  from "./FlexBetween";
-import { useAuthStore,useCandidateStore,useTableStore,useVoterStore,useVoteStore, useKpiStore } from "../hooks";
+import { useAuthStore,useCandidateStore,useTableStore,useVoterStore,useVoteStore,useKpiStore } from "../hooks";
 import {
     AppBar,
     Button,
@@ -29,7 +29,7 @@ export const Navbar = ({isSidebarOpen, setIsSidebarOpen})=>{
     const {startOnLogoutCandidates} = useCandidateStore();
     const {startUnSetTable}= useTableStore();
     const {statUnsetVote}= useVoteStore();
-    const {startOnLogoutKpi} = useKpiStore();
+    const {startOnLogoutKpi}= useKpiStore();
     const theme = useTheme();
     const [anchorEl,setAnchorEl] = useState(null);
     const IsOpen= Boolean(anchorEl);
