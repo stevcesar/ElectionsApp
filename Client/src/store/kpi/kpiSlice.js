@@ -3,6 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 export const kpiSlice = createSlice({
     name: 'kpi',
     initialState:{
+
         kpis:[],
         errorMessageKpi: undefined
     },
